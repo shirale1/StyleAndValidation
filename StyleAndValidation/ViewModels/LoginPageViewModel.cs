@@ -63,9 +63,17 @@ namespace StyleAndValidation.ViewModels
                 if (AppShell.Current.Navigation.ModalStack.Count > 0)
                 {
                     await AppShell.Current.Navigation.PopModalAsync();
+                   
+
                 }
-             
-                if (success) await AppShell.Current.GoToAsync("///MyPage");
+
+
+                if (success)
+                {
+                    await AppShell.Current.Navigation.PopToRootAsync();
+                    await AppShell.Current.GoToAsync("///MyPage");
+
+                }
             },()=>!string.IsNullOrEmpty(Password)&& !string.IsNullOrEmpty(Username));
             RegisterCommand = new Command(async () => { await AppShell.Current.GoToAsync("Register"); });
             ForgotPasswordCommand = new Command( () => { });
